@@ -21,7 +21,7 @@
     }
     .button {
       background-color: black;
-      color: red;
+      color: red;  
       font-family: verdana;
       font-size: 7vw;
       border: 1px solid red;
@@ -33,7 +33,7 @@
   <script>
     function ready() {
     
-      b7=document.getElementByClass("buttonGroup8")
+      b7=document.getElementByTagName("button")
       b7.addEventListener("click", () => {
        play(by.innerHTML);
       });
