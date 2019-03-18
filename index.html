@@ -33,23 +33,23 @@
   <script>
     function ready() {
     
-      b7=document.getElementById("bit7")
+      b7=document.getElementByClass("buttonGroup8")
       b7.addEventListener("click", () => {
-       play();
+       play(by.innerHTML);
       });
  
       setUpDone = false;
      
-      setUp = () => {
+      setUp = (note) => {
         setUpDone = true;
         if ('webkitAudioContext' in window)
           audioCtx = new webkitAudioContext()
         else
           audioCtx = new AudioContext()
         oscillator = audioCtx.createOscillator()
-        oscillator.frequency.value = 440; //19000
+        oscillator.frequency.value = note;//440; //19000
         oscillatorR = audioCtx.createOscillator()
-        oscillatorR.frequency.value = 440; //19000
+        oscillatorR.frequency.value = notes; //440; //19000
         if ('webkitAudioContext' in window) {
           gainNode = audioCtx.createGainNode()
           gainNodeR = audioCtx.createGainNode()
@@ -75,7 +75,7 @@
       }
     }
   
-    play = () => {
+    play = (note) => {
       if (!setUpDone) {
         setUp();
       }
@@ -95,8 +95,10 @@
 <body>
   <div>
 
-    <button id="bit7" class="buttonGroup8">play</button>
-
+    <button class="buttonGroup8">440</button>
+<button class="buttonGroup8">660</button>
+    <button class="buttonGroup8">770</button>
+    <button class="buttonGroup8">880</button>
   </div>
 
 </body>
