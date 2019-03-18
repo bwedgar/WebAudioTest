@@ -79,8 +79,9 @@
       if (!setUpDone) {
         setUp();
       }
-        gainNode.gain.setValueAtTime(1.0, 100)
-      gainNodeR.gain.setValueAtTime(1.0, 100)
+        t = audioCtx.currentTime
+        gainNode.gain.setValueAtTime(1.0,t)
+      gainNodeR.gain.setValueAtTime(1.0, t)
     }
     if (document.readyState == 'loading') {
       document.addEventListener('DOMContentLoaded', ready);
