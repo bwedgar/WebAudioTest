@@ -21,7 +21,7 @@
     }
     .button {
       background-color: black;
-      color: red;  
+      color: red;
       font-family: verdana;
       font-size: 7vw;
       border: 1px solid red;
@@ -32,14 +32,20 @@
 
   <script>
     function ready() {
-    
-      b7=document.getElementByTagName("button")
-      b7.addEventListener("click", () => {
-       play(by.innerHTML);
+      b0 = document.getElementById("b0")
+      b0.addEventListener("click", () => {
+        play(440);
       });
- 
+      b1 = document.getElementById("b1")
+      b1.addEventListener("click", () => {
+        play(660);
+      });
+      stop = document.getElementById("stop")
+      stop.addEventListener("click", () => {
+        gainNode.gain.setValueAtTime(0.0, t)
+        gainNodeR.gain.setValueAtTime(0.0, t)
+      });
       setUpDone = false;
-     
       setUp = (note) => {
         setUpDone = true;
         if ('webkitAudioContext' in window)
@@ -47,9 +53,9 @@
         else
           audioCtx = new AudioContext()
         oscillator = audioCtx.createOscillator()
-        oscillator.frequency.value = note;//440; //19000
+        oscillator.frequency.value = note; //440; //19000
         oscillatorR = audioCtx.createOscillator()
-        oscillatorR.frequency.value = notes; //440; //19000
+        oscillatorR.frequency.value = note; //440; //19000
         if ('webkitAudioContext' in window) {
           gainNode = audioCtx.createGainNode()
           gainNodeR = audioCtx.createGainNode()
@@ -74,13 +80,14 @@
         }
       }
     }
-  
     play = (note) => {
-      if (!setUpDone) {
-        setUp();
-      }
-        t = audioCtx.currentTime
-        gainNode.gain.setValueAtTime(1.0,t)
+     if (!setUpDone) {
+        setUp(note);
+     }
+     oscillator.frequency.value = note;
+     oscillatorR.frequency.value = note;
+      t = audioCtx.currentTime
+      gainNode.gain.setValueAtTime(1.0, t)
       gainNodeR.gain.setValueAtTime(1.0, t)
     }
     if (document.readyState == 'loading') {
@@ -95,10 +102,9 @@
 <body>
   <div>
 
-    <button class="buttonGroup8">440</button>
-<button class="buttonGroup8">660</button>
-    <button class="buttonGroup8">770</button>
-    <button class="buttonGroup8">880</button>
+    <button id="b0" class="button">440</button>
+    <button id="b1" class="button">660</button>
+<button id="stop" class="button">stop</button>
   </div>
 
 </body>
